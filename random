@@ -1,0 +1,51 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"strconv"
+	"time"
+)
+
+const guest = 10
+
+func main() {
+
+	rand.Seed(time.Now().Unix())
+
+	if len(os.Args) != 2 {
+
+		fmt.Println("Error!")
+
+		return
+	}
+
+	arg, err := strconv.Atoi(os.Args[1])
+
+	if err != nil || arg <= 0 {
+
+		fmt.Printf("Sorry %v is not valid", arg)
+
+		return
+	}
+
+	for i := 0; i < guest; i++ {
+
+		guess := rand.Intn(arg + 1)
+
+		if guess == arg && i == 0 {
+
+			fmt.Println("First try")
+
+			break
+
+		} else {
+
+			fmt.Printf("%d ", guess)
+
+		}
+
+	}
+
+}
