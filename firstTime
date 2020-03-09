@@ -1,0 +1,71 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"strconv"
+	"time"
+)
+
+const (
+	guest = 10
+
+	usage = `Welcome to the Lucky Number Game! 🍀
+The program will pick %d random numbers.
+Your mission is to guess one of those numbers.
+The greater your number is, harder it gets.
+Wanna play?
+`
+)
+
+func main() {
+
+	rand.Seed(time.Now().Unix())
+
+	if len(os.Args) != 2 {
+
+		fmt.Println(usage)
+
+		return
+	}
+
+	arg, err := strconv.Atoi(os.Args[1])
+
+	if err != nil || arg <= 0 {
+
+		fmt.Printf("Sorry %v is not valid", arg)
+
+		return
+	}
+
+	for i := 0; i < guest; i++ {
+
+		guess := rand.Intn(arg + 1)
+
+		switch {
+
+		case guess < 5:
+
+			fmt.Println("Good Job")
+
+			break
+
+		case guess > 10:
+
+			fmt.Println("Winner")
+
+			break
+
+		default:
+
+			fmt.Println("Better Luck Next Time")
+
+			break
+		}
+
+		break
+
+	}
+
+}
